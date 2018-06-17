@@ -1,3 +1,6 @@
+{% load bootstrap4 %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +11,6 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <img src="{% static 'img/ig-logo1.png' %}" alt="Logo" class="navbar-brand">
             <hr style="width: 1px; height: 20px; display: inline-block;"> 
             <a class="navbar-brand" href="{% url 'home' %}"> OGInsta+ </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

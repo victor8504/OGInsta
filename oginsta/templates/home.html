@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block content %}
+
+    {{ block.super }}
+
+    <div class="container">
+        {% for image in images %}
+            <div class="card-deck mb-2">
+                <div class="card-header">
+                    <h4 class="card-title">{{ image.user.username }} </h5>
+                </div>
+                <div class="card-body">
+                    {% if image.user.profile.profile_pic %}
+                        <img class="card-img-top .img-fluid" src="{{ image.user.profile.profile_pic.url }}" alt="profile pic">
+                    {% else %}
+                    {% endif %}
+                    <h4 class="card-title">{{ image.user.username }}</h5>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{ image.user.profile.bio }}</small>
+                </div>
+            </div> 
+        {% endfor %}
+    </div>
+
+  {% endblock %}
