@@ -9,3 +9,12 @@ from .models import Profile, Image, Comment, Like
 def home(request):
     images = Image.get_images()
     return render(request, 'home.html', {"images":images})
+
+
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    user = User.objects.get(username = username)
+    images = Image.objects.filter(user_id = user)
+    profile = Profile.objects.get(user=user)
+
+    return render(request, 'profile.html', {"user": user,"images": images,"profile": profile})
