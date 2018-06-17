@@ -9,7 +9,13 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
 
 
-
+class Image(models.Model):
+    image = models.ImageField(upload_to = 'photos/')
+    name = models.CharField(max_length = 25, blank = True)
+    caption = models.TextField(blank = True)
+    likes = models.PositiveIntegerField(default = 0)
+    date_posted = models.DateTimeField(auto_now_add = True)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
 
 
 
