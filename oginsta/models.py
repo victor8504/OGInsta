@@ -22,7 +22,16 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
-    
+    @classmethod
+    def get_profiles(cls):
+        profiles = cls.objects.all()
+        return profiles
+
+    @classmethod
+    def search_profiles(cls, query):
+        profile = cls.objects.filter(user__username__icontains=query)
+        return profile
+
     def __str__(self):
         return self.user.username
 
@@ -41,3 +50,6 @@ class Comment(models.Model):
     date_commented = models.DateTimeField(auto_now_add = True)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     image = models.ForeignKey(Image)
+
+    def __str__(self):
+        return self.comment
