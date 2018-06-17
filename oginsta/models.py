@@ -19,6 +19,12 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
+    def delete_profile(self):
+        self.delete()
+
+    
+    
+
 
 class Image(models.Model):
     image = models.ImageField(upload_to = 'photos/')
