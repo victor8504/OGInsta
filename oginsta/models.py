@@ -72,3 +72,12 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.comment
+
+
+class Like(models.Model):
+    date_created = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, related_name='liker')    
+    image = models.ForeignKey(Image, related_name='liked_post')
+
+    def __str__(self):
+        return '{} : {}'.format(self.user, self.image)
