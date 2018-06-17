@@ -44,6 +44,9 @@ class Image(models.Model):
     date_posted = models.DateTimeField(auto_now_add = True)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
 
+    def save_image(self):
+        self.save()
+    
     @classmethod
     def get_images(cls):
         images = cls.objects.order_by('date_posted')
