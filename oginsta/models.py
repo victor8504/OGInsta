@@ -37,12 +37,15 @@ class Profile(models.Model):
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to = 'photos/')
+    image = models.ImageField(upload_to = 'photos/', default = 'image')
     name = models.CharField(max_length = 25, blank = True)
     caption = models.TextField(blank = True)
     likes = models.PositiveIntegerField(default = 0)
     date_posted = models.DateTimeField(auto_now_add = True)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class Comment(models.Model):
