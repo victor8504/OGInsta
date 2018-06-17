@@ -18,4 +18,8 @@ class Image(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
 
 
-
+class Comment(models.Model):
+    comment = models.CharField(max_length = 150, blank = True)
+    date_commented = models.DateTimeField(auto_now_add = True)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    image = models.ForeignKey(Image)
