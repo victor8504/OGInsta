@@ -23,7 +23,8 @@ class Profile(models.Model):
         self.delete()
 
     
-    
+    def __str__(self):
+        return self.user.username
 
 
 class Image(models.Model):
