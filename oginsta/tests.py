@@ -8,3 +8,13 @@ class ImageTestClass(TestCase):
 
     def test_instance(self):
         self.assertTrue(isinstance(self.image, Image))
+
+    def test_saving_image(self):
+        self.image.save_image()
+        images = Image.objects.all()
+        self.assertTrue(len(images) > 0)
+
+    def test_delete_image(self):
+        self.image.delete_image()
+        images = Image.objects.all()
+        self.assertTrue(len(images) < 1)
