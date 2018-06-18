@@ -29,6 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG',default=False,cast=bool)
 
 ALLOWED_HOSTS = ['*']
+LOGIN_REDIRECT_URL = '/'
 
 
 # Application definition
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'gram.urls'
