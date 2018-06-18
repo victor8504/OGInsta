@@ -6,7 +6,7 @@
 #### By **[Victor NJuguna](https://github.com/victor8504)**
 
 ## Description
-[This](https://oginsta.herokuapp.com/) is a photo posting website created using Django. A user with an account can:
+This is a photo posting website created using Django. A user with an account can:
 * post images with captions
 * view list of other users
 * comment on a post
