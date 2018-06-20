@@ -18,7 +18,6 @@ DEBUG = config('DEBUG',default=False,cast=bool)
 ALLOWED_HOSTS = ['*']
 LOGIN_REDIRECT_URL = '/'
 
-
 # Application definition
 
 INSTALLED_APPS = [

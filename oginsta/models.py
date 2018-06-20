@@ -10,14 +10,17 @@ class Profile(models.Model):
     bio = models.TextField(max_length = 50, blank = True)
     user = models.OneToOneField(User, on_delete = models.CASCADE)
 
-    @receiver(post_save, sender = User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user = instance)
+    # @receiver(post_save, sender = User)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         Profile.objects.create(user = instance)
 
-    @receiver(post_save, sender = User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
+    # @receiver(post_save, sender = User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     instance.profile.save()
+
+    def save_profile(self):
+        self.save()
 
     def delete_profile(self):
         self.delete()
@@ -38,7 +41,7 @@ class Profile(models.Model):
 
 class Image(models.Model):
     image = models.ImageField(upload_to = 'photos/', default = 'image')
-    name = models.CharField(max_length = 25, blank = True)
+    name = models.CharField(max_length = 100, blank = True)
     caption = models.TextField(blank = True)
     likes = models.PositiveIntegerField(default = 0)
     date_posted = models.DateTimeField(auto_now_add = True)

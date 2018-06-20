@@ -23,19 +23,51 @@ def profile(request):
 
 @login_required(login_url='/accounts/login/')
 def post(request):
-    current_user = request.user
-    profiles = Profile.objects.all()
-    for profile in profiles:
-        if profile.user.id == current_user.id:
-            if request.method == 'POST':
-                form = PostForm(request.POST, request.FILES)
-                if form.is_valid():
-                    post = form.save(commit=False)
-                    post.name = current_user
-                    post.profile = profile
-                    post.save()
-                    return redirect('home')
-            else:
-                form = PostForm()
+    # current_user = User.objects.filter(username = request.user)
+    # print(current_user)    
+    # profiles = Profile.objects.all()
+    # if request.method == 'POST':
+    #     form = PostForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         post = form.save(commit=False)
+    #         post.name = current_user
+    #         # post.profile = profile
+    #         post.save()
+    #         return redirect('home')
+    # else:
+    #     form = PostForm()
 
-    return render(request, 'post.html', {"post_form": form,"user": current_user})
+    # return render(request, 'post.html', {"post_form": form,"user": current_user})
+    current_user = request.user
+    if request.method == 'POST':
+
+        form = PostForm(request.POST, request.FILES)
+
+        if form.is_valid:
+            post = form.save(commit=False)
+            post.name = current_user
+            post.save()
+            return redirect('home')
+    else:
+        form = PostForm()
+    return render(request, 'post.html', {"post_form": form})
+
+
+@login_required(login_url='/accounts/login/')
+def search_results(request):
+    if 'query' in request.GET and request.GET['query']:
+        search_term = request.GET.get("query")
+        user = Profile.search_profiles(search_term)
+        images = Image.objects.all()
+        message = f"{search_term}"
+
+        content = {
+            "message": message,
+            "found": user,
+            "images": images,
+        }
+
+        return render(request, 'search.html', content)
+    else:
+        message = "You haven't searched for anyone"
+        return render(request, 'search.html', {"message": message})
